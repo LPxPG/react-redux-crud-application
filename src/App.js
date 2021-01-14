@@ -1,4 +1,5 @@
 import React from 'react'; // React : JSX使用時は要import
+import PropTypes from 'prop-types'
 
 const App = () => {
   const profiles = [
@@ -11,7 +12,11 @@ const App = () => {
       age :5
     },
     {
-      name: "NoName", // age にdefaultPropsが適用
+      name: "NoName",
+    },
+    {
+      name: 1, // 型定義エラー
+      age : "5" // 型定義エラー
     }
   ]
   return (
@@ -34,10 +39,10 @@ const User = (props) => {
   return <div>Hi, I am {props.name}, and {props.age} years old!</div>
 }
 
-
-User.defaultProps = {
-  age : 1
+// プロパティの型定義
+User.propTypes = {
+  name: PropTypes.string,
+  age: PropTypes.number.isRequired, // isRequired : 必須プロパティ
 }
-
 
 export default App;
