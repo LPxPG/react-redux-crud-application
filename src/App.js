@@ -1,53 +1,42 @@
 import React from 'react'; // React : JSX使用時は要import
 
-// JSX
-// class App extends Component {
-//   render() {
-//     return (
-//     <React.Fragment>
-//       <label htmlFor="bar">
-//         bar
-//       </label>
-//       <input type="text" onChange={()=>  {console.log("I am clicked!")}} />
-//     </React.Fragment>
-//     )
-    // ルート要素は単一要素である必要。Vue.jsと同様。 React.Fragment要素はレンダリングされない。
-
-
-    // const greeting = "Hi, Tom!"
-    // const dom = <h1 className="foo">{greeting}</h1> // { } : JSが記述可
-    // return dom
-
-    // return <input type="text" onChange={()=>  {console.log("I am clicked!")}} />
-
-    // return <h1>Hello, world!</h1> // JavaScript XML
-//   }
-// }
-
-// JS変換時 : 参考 https://bvaughn.github.io/babel-repl/
-// class App extends Component {
-//   render() {
-//     return React.createElement(
-//       "div",
-//       null,
-//       "Hello, world!"
-//     )
-//   }
-// }
-
-
-// 関数コンポーネント
 const App = () => {
+  const profiles = [
+    {
+      name: "Taro",
+      age : 10
+    },
+    {
+      name: "Hanako",
+      age :5
+    },
+    {
+      name: "NoName", // age にdefaultPropsが適用
+    }
+  ]
   return (
     <div>
-      <Cat />
-      <Cat />
-      <Cat />
+    {
+      profiles.map((profile, index) => {
+        return  <User name={profile.name} age={profile.age} key={index} />
+      })
+      // key : uniqueな値をもつpropが必要
+    }
+      {/*
+      <User name={"Taro"} age={10} />
+      <User name={"Hanako"} age={5} />
+      */}
     </div>
   )
 }
-const Cat = () => {
-  return <div>Meow!</div>
+
+const User = (props) => {
+  return <div>Hi, I am {props.name}, and {props.age} years old!</div>
+}
+
+
+User.defaultProps = {
+  age : 1
 }
 
 
