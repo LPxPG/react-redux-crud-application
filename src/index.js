@@ -3,24 +3,28 @@ import ReactDOM from 'react-dom';
 import { createStore, applyMiddleware } from "redux"
 import { Provider } from "react-redux"
 import thunk from "redux-thunk" // 要 applyMiddleware
+import {BrowserRouter, Route, Switch} from "react-router-dom"
 
 import './index.css';
 import reducer from "./reducers"
 
 import EventsIndex from './components/events_index';
+import EventsNew from './components/events_new';
+
 import * as serviceWorker from './serviceWorker';
 
 
-// store にstate が集約される
 const store = createStore(reducer, applyMiddleware(thunk))
 
-
-// <App /> を <Provider>でラップするとアプリケーション内の全階層のコンポーネントからstoreが利用可能になる。
 ReactDOM.render(
   <Provider store={store}>
-    <EventsIndex />
+    <BrowserRouter>
+      <Switch>
+        <Route exact path="/events/new" component={EventsNew} />
+        <Route exact path="/" component={EventsIndex} />
+      </Switch>
+    </BrowserRouter>
   </Provider>,
-  // <App />,
   document.getElementById('root')
 );
 
