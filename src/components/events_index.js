@@ -15,7 +15,11 @@ class EventsIndex extends Component {
       <tr key={event.id}>
         {/* 要 keyプロパティ (unique値) */}
         <td>{event.id} </td>
-        <td>{event.title} </td>
+        <td>
+          <Link to={`/events/${event.id}`}>
+          {event.title}
+          </Link>
+        </td>
         <td>{event.body} </td>
       </tr>
     ))
